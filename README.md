@@ -16,7 +16,7 @@ This project uses a set of images to calibrate the camera, by estimating the Int
 
 ### Requirements:
 
-  * OpenCV : Open-Source Computer Vision Library. If you do not have it, you can use the [OpenCV!](www.opencv.org) website to download the library.
-  * ViSP : Visual Servoing Platform. Visit the [ViSP!](https://visp.inria.fr/) website for download and build instructions.
+  * OpenCV : Open-Source Computer Vision Library. If you do not have it, you can use the [OpenCV](www.opencv.org) website to download the library.
+  * ViSP : Visual Servoing Platform. Visit the [ViSP](https://visp.inria.fr/) website for download and build instructions.
 
   We use CMAKE to configure our project. If you do not have it, then you can install it by using the command `sudo snap install cmake`
