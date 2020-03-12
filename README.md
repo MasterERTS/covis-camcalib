@@ -12,7 +12,7 @@ This project uses a set of images to calibrate the camera, by estimating the Int
   1. Clone the repository onto your computer. You can either download the zip or use `git clone`
   1. Create the build directory and navigate into it `mkdir build && cd build`
   1. Run cmake to configure the project `cmake ..`
-  1. Once configuration is done, you can use `make` to build the project. This will generate two executables: `./record` for saving the images, and `./calibration` for calibrating the camera.
+  1. Once configuration is done, you can use `make` to build the project. This will generate two executables: `./record` for saving the images, `./calibration` for calibrating the camera, and `./posecomputation` for pose computation.
 ---
 
 ### Requirements:

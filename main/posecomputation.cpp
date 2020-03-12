@@ -38,11 +38,12 @@ int main()
     patterns.reserve(36);
 
 
+
     //GridTracker tracker;      // this tracker detects a 6x6 grid of points
     CBTracker tracker(8,6);     // this one is to be given the chessboard dimension (8x6)
 
-    // read images while the corresponding file exists
-    // images are displayed to ensure the detection was performed
+    vpHomogeneousMatrix M;  // camera pose
+
     while(true)
     {
         stringstream ss;
@@ -65,22 +66,31 @@ int main()
     }
     cout << "Found " << patterns.size() << " images" << endl;
 
-    // create a camera model (Perspective or Distortion)
-    // default parameters should be guessed from image dimensions
-    //PerspectiveCamera cam(1,1,1,1);   // not a very good guess
+    PerspectiveCamera cam(544.6583991, 546.1633797, 319.7809807, 235.3760285);
 
-    // camera model with default parameters ( in calibration . cpp )
-    const double pxy = 0.5*( patterns[0].im.rows + patterns[0].im.cols );
-    PerspectiveCamera cam(pxy, pxy, 0.5*patterns[0].im.cols, 0.5*patterns[0].im.rows);
-
-    // initiate virtual visual servoing with inter-point distance and pattern dimensions
     VVS vvs(cam, 0.03, 8, 6);
 
-    // calibrate from all images
-    vvs.calibrate(patterns);
+    // find pose of camera
+    for(int i = 0; i < 9; ++i) {
+        stringstream ss;
+        ss << prefix << i << ".jpg";
+        std::ifstream testfile(base + ss.str());
+        if(testfile.good()) {
+            testfile.close();
+            Pattern pat;
+            pat.im = cv::imread(base + ss.str());
+            tracker.detect(pat.im, pat.point);
+            pat.window = ss.str();
 
-    // print results
-    cout << "Final calibration: " << cam.xi_.t() << endl;
+            // draw extraction results
+            drawSeq(pat.window, pat.im, pat.point);
+            waitKey(0);
+
+            // calibrate from this single image
+            if(i == 0){vvs.computePose(pat, M, true);} else{vvs.computePose(pat, M);}
+
+        }
+    }
 
     // this will wait for a key pressed to stop the program
     waitKey(0);
