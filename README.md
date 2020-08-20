@@ -6,7 +6,7 @@ Done as a part of the Computer Vision(COVIS) course, offered by Prof. Vincent Fr
 ### Explanation:
 This project uses a set of images to calibrate the camera, by estimating the Intrinsic and Extrinsic Jacobians. We use the Perspective Projection Model of a camera as our fundamental model.
 
-![Alt Text](../images/img0.jpg)
+![Alt Text](https://github.com/MasterERTS/covis-camcalib/blob/master/images/gif-1.gif)
 
 ---
 
